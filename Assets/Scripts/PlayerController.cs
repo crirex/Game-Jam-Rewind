@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static float SpeedModifier { get; set; }
+    public static float SpeedModifier { get; set; } = 1.0f;
 
     [SerializeField]
     private float speed = 0.2f;
@@ -13,12 +13,13 @@ public class PlayerController : MonoBehaviour
 
     private Transform pickedObject = null;
     private bool isActionPressed = false;
+    private GridMap gridMap = new GridMap(10, 1.0f);
 
 
     // Start is called before the first frame update
     void Start()
     {
-        SpeedModifier = 1.0f;
+
     }
 
     // Update is called once per frame
@@ -38,13 +39,22 @@ public class PlayerController : MonoBehaviour
             {
                 if (pickedObject != null)
                 {
-                    pickedObject.parent = null;
-                    pickedObject = null;
+                    GridItem curentGridItem = gridMap.GetItemFromPosition(transform.position.x, transform.position.y);
+                    if (curentGridItem != null)
+                    {
+                        if (curentGridItem.Placeable)
+                        {
+                            curentGridItem.objectPlaced = pickedObject;
+                            curentGridItem.objectPlaced.gameObject.SetActive(true);
+                            curentGridItem.objectPlaced.position = new Vector3(curentGridItem.position.x, curentGridItem.position.y, pickedObject.position.z);
+                            pickedObject = null;
+                        }
+                    }
                 }
                 else if (closestObjectTransform != null)
                 {
                     pickedObject = closestObjectTransform;
-                    closestObjectTransform.parent = transform;
+                    pickedObject.gameObject.SetActive(false);
                 }
                 isActionPressed = true;
             }
@@ -92,5 +102,4 @@ public class PlayerController : MonoBehaviour
             return null;
         }
     }
-
 }
