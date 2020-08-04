@@ -49,7 +49,6 @@ public class GridMap
 
     public GridItem GetItemFromPosition(float posX, float posY)
     {
-        Debug.Log(posX / CellSize + CellSize / 2 + " " + posY / CellSize + CellSize / 2);
         return GetItemFromIndex(Mathf.RoundToInt(posX / CellSize - CellSize / 2), Mathf.RoundToInt(posY / CellSize - CellSize / 2));
     }
 
