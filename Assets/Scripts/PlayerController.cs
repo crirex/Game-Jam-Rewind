@@ -11,10 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float maximumDistance = 0.3f;
 
-    public InteractItem inventory = null;
+   
     private bool isActionPressed = false;
-
-    private bool InventoryFull => inventory != null;
 
     private GameObject placementVision;
 
@@ -87,14 +85,17 @@ public class PlayerController : MonoBehaviour
                 {
                     GridItem curentGridItem = GeneralAttributes.Instance.houseGrid.GetItemFromPosition(
                         placementVision.transform.position.x, placementVision.transform.position.y);
-                    if ((curentGridItem?.Placeable).Value)
+                    if (curentGridItem != null)
                     {
-                        if (inventory != null)
+                        if (curentGridItem.Placeable)
                         {
-                            curentGridItem.objectPlaced = inventory.transform;
-                            curentGridItem.objectPlaced.gameObject.SetActive(true);
-                            curentGridItem.objectPlaced.position = new Vector3(curentGridItem.position.x, curentGridItem.position.y, inventory.transform.position.z);
-                            inventory = null;
+                            if (!GeneralAttributes.Instance.inventory.InventoryEmpty)
+                            {
+                                curentGridItem.objectPlaced = GeneralAttributes.Instance.inventory.popInteractItem().transform;
+                                curentGridItem.objectPlaced.gameObject.SetActive(true);
+                                curentGridItem.objectPlaced.position = new Vector3(curentGridItem.position.x, curentGridItem.position.y,
+                                    curentGridItem.objectPlaced.transform.position.z);
+                            }
                         }
                     }
                 }

@@ -42,17 +42,60 @@ public class InteractItem : MonoBehaviour
 
     public void QuickPressInteract()
     {
-        if(IsQuickPressInteractAvailable)
+        if (IsQuickPressInteractAvailable && tag.Contains("Interactable"))
         {
+            timeSinceLastInteractFinished = 0;
             //Throw object on the ground. Object is assignable
+            Queue<GridItem> availableSpawnPoints = new Queue<GridItem>();
+            GridItem spawnPointGridItem = GeneralAttributes.Instance.houseGrid.GetItemFromPosition(
+                transform.position.x, transform.position.y);
+            if(spawnPointGridItem == null)
+            {
+                Debug.LogWarning("Can't spawn object, this object isn't standing in a valid area.");
+                return;
+            }
+            availableSpawnPoints.Enqueue(spawnPointGridItem);
+
+            while(availableSpawnPoints.Count > 0 && availableSpawnPoints.Count < (GeneralAttributes.Instance.houseGrid.TotalSize / 2)) //Magical number
+            {
+                var currentGridItem = availableSpawnPoints.Dequeue();
+                if (currentGridItem != null)
+                {
+                    if (currentGridItem.Placeable)
+                    {
+                        var newObject = Instantiate(spawnObject, new Vector3(currentGridItem.position.x,
+                            currentGridItem.position.y, 0), Quaternion.identity);
+                        currentGridItem.objectPlaced = newObject.transform;
+                        return;
+                    }
+                    else
+                    {
+                        var currentGridItemIndex = GeneralAttributes.Instance.houseGrid.getIndexFromPosition(
+                            new Vector2(currentGridItem.position.x, currentGridItem.position.y));
+                        availableSpawnPoints.Enqueue(GeneralAttributes.Instance.houseGrid.GetItemFromIndex(
+                            currentGridItemIndex + new Vector2Int(0, 1)));
+                        availableSpawnPoints.Enqueue(GeneralAttributes.Instance.houseGrid.GetItemFromIndex(
+                            currentGridItemIndex + new Vector2Int(0, -1)));
+                        availableSpawnPoints.Enqueue(GeneralAttributes.Instance.houseGrid.GetItemFromIndex(
+                            currentGridItemIndex + new Vector2Int(1, 0)));
+                        availableSpawnPoints.Enqueue(GeneralAttributes.Instance.houseGrid.GetItemFromIndex(
+                            currentGridItemIndex + new Vector2Int(-1, 0)));
+
+                    }
+                }
+                
+            }
+            Debug.LogWarning("Can't spawn object, this object isn't standing in a valid area.");
         }
     }
 
     public void LongPressInteract(PlayerController player)
     {
-        QuickPressInteract();
-        player.inventory = this;
-        //Debug.Log(player.inventory.transform.position);
-        player.inventory.gameObject.SetActive(false);
+        if (tag.Contains("Pickable"))
+        {
+            QuickPressInteract();
+            GeneralAttributes.Instance.inventory.items.Add(this);
+            gameObject.SetActive(false);
+        }
     }
 }

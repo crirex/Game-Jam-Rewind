@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GeneralAttributes
 {
-    private static GeneralAttributes instance = null;
-
     public GridMap houseGrid = new GridMap(10, 1.0f);
 
+    public Inventory inventory = new Inventory();
+
+    private static GeneralAttributes instance = null;
     public static GeneralAttributes Instance
     {
         get
