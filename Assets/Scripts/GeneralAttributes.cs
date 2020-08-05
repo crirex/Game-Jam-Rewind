@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GeneralAttributes
 {
-    public GridMap houseGrid = new GridMap(10, 1.0f);
+    public GridMap houseGrid = new GridMap(16, 1.0f);
 
     public Inventory inventory = new Inventory();
 
