@@ -64,7 +64,7 @@ public class InteractItem : MonoBehaviour
                     if (currentGridItem.Placeable)
                     {
                         var newObject = Instantiate(spawnObject, new Vector3(currentGridItem.position.x,
-                            currentGridItem.position.y, 0), Quaternion.identity);
+                            currentGridItem.position.y, transform.position.z), Quaternion.identity);
                         currentGridItem.objectPlaced = newObject.transform;
                         return;
                     }

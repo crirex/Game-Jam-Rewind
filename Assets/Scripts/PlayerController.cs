@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
 
     private float howMuchTimeTheActionButtonWasPressed = 0;
 
+    [SerializeField]
+    private Vector2 maxPositionRange;
+    [SerializeField]
+    private Vector2 minPositionRange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         MoveCharacter();
         GetCurrentObjectOnButtonPressed();
+        ClampPlayerInRange();
     }
 
     void GetCurrentObjectOnButtonPressed()
@@ -156,5 +162,14 @@ public class PlayerController : MonoBehaviour
         {
             return null;
         }
+    }
+
+    void ClampPlayerInRange()
+    {
+        transform.position = new Vector3(
+            Mathf.Clamp(transform.position.x, minPositionRange.x, maxPositionRange.x),
+            Mathf.Clamp(transform.position.y, minPositionRange.y, maxPositionRange.y),
+            transform.position.z
+            );
     }
 }
