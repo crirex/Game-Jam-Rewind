@@ -94,8 +94,11 @@ public class InteractItem : MonoBehaviour
         if (tag.Contains("Pickable"))
         {
             QuickPressInteract();
-            GeneralAttributes.Instance.inventory.items.Add(this);
-            gameObject.SetActive(false);
+            if (!GeneralAttributes.Instance.inventory.InventoryFull)
+            {
+                GeneralAttributes.Instance.inventory.items.Add(this);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

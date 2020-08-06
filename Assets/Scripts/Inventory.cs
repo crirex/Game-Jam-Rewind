@@ -27,4 +27,14 @@ public class Inventory
         }
         return interactItem;
     }
+
+    public InteractItem peekInteractItem(int index = 0)
+    {
+        InteractItem interactItem = null;
+        if (index < items.Count)
+        {
+            interactItem = items[index];
+        }
+        return interactItem;
+    }
 }

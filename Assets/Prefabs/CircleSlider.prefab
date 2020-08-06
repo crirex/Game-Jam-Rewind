@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6074234609357194458}
   - component: {fileID: 6074234609357194457}
   m_Layer: 5
-  m_Name: Circle
+  m_Name: CircleSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6074234609663544688}
   - component: {fileID: 6074234609663544690}
   - component: {fileID: 6074234609663544689}
-  - component: {fileID: 6074234609663544691}
+  - component: {fileID: 7560298216736704119}
   m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6074234609663544691
+--- !u!114 &7560298216736704119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,8 +161,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6074234609663544687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b5608af30df045719fe9c398980df5f, type: 3}
+  m_Script: {fileID: 11500000, guid: a786d826d8faac241bf0deeb7ad35878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDecreasing: 0
+  isDecreasing: 1
   timeToWait: 2
+  value: -1
