@@ -13,20 +13,24 @@ public class GridMap
 
     public int TotalSize => Height * Width;
 
-    public GridMap(int size, float cellSize)
+    Vector2 possitionOffset;
+
+    public GridMap(int size, float cellSize, Vector2 offset)
     {
         gridItems = new GridItem[size, size];
         this.Width = size;
         this.Height = size;
         CellSize = cellSize;
+        possitionOffset = offset;
     }
 
-    public GridMap(int width, int height, float cellSize)
+    public GridMap(int width, int height, float cellSize, Vector2 offset)
     {
         gridItems = new GridItem[width, height];
         this.Width = width;
         this.Height = height;
         CellSize = cellSize;
+        possitionOffset = offset;
     }
 
     public void ResizeGridMap(int width, int height)
@@ -44,11 +48,11 @@ public class GridMap
         this.Height = height;
     }
 
-    public bool isPositionValid(Vector2 index) => (0 <= index.x && index.x < Width && 0 <= index.y && index.y < Height);
+    public bool isIndexValid(Vector2 index) => (0 <= index.x && index.x < Width && 0 <= index.y && index.y < Height);
 
     public Vector2Int getIndexFromPosition(Vector2 position) => new Vector2Int(
-        Mathf.RoundToInt(position.x / CellSize - CellSize / 2), 
-        Mathf.RoundToInt(position.y / CellSize - CellSize / 2));
+        Mathf.RoundToInt(position.x / CellSize - CellSize / 2 - possitionOffset.x), 
+        Mathf.RoundToInt(position.y / CellSize - CellSize / 2 - possitionOffset.y));
 
     public void ResizeGridMap(int size)
     {
@@ -68,11 +72,11 @@ public class GridMap
 
     public GridItem GetItemFromIndex(Vector2Int index)
     {
-        if (isPositionValid(index))
+        if (isIndexValid(index))
         {
             if (gridItems[index.x, index.y] == null)
             {
-                gridItems[index.x, index.y] = new GridItem(index.x * CellSize + CellSize/2, index.y * CellSize + CellSize / 2);
+                gridItems[index.x, index.y] = new GridItem(index.x * CellSize + CellSize/2 + possitionOffset.x, index.y * CellSize + CellSize / 2 + possitionOffset.y);
             }
             return gridItems[index.x, index.y];
         }

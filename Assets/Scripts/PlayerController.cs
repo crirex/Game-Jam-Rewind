@@ -53,6 +53,13 @@ public class PlayerController : MonoBehaviour
         GetCurrentObjectOnButtonPressed();
         PlaceCurrentObjectOnButtonPressed();
         ClampPlayerInRange();
+        if (Input.GetKey(KeyCode.Return))
+        {
+            foreach(Fading currentObject in FindObjectsOfType<Fading>())
+            {
+                currentObject.isDissolving = true;
+            }
+        }
     }
 
     void GetCurrentObjectOnButtonPressed()
@@ -198,6 +205,10 @@ public class PlayerController : MonoBehaviour
                             closestTileRenderer.material = defaultMaterial;
                         }
                         curentGridItem.objectPlaced.gameObject.SetActive(true);
+                        if (curentGridItem.objectPlaced.gameObject.GetComponent<BoxCollider2D>() != null)
+                        {
+                            curentGridItem.objectPlaced.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                        }
                         curentGridItem.objectPlaced.position = new Vector3(curentGridItem.position.x, curentGridItem.position.y,
                             curentGridItem.objectPlaced.transform.position.z);
                     }
@@ -220,9 +231,9 @@ public class PlayerController : MonoBehaviour
                 placementVision.transform.localPosition.z
                 );
         }
-
         Vector3 moveDirection = new Vector3(moveHorizontal, moveVertical, 0);
         transform.position += moveDirection.normalized * speed * SpeedModifier;
+
     }
 
     Transform GetClosestObject()
