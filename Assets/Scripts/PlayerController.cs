@@ -55,11 +55,12 @@ public class PlayerController : MonoBehaviour
         ClampPlayerInRange();
         if (Input.GetKey(KeyCode.Return))
         {
-            foreach(Fading currentObject in FindObjectsOfType<Fading>())
+            foreach (Fading currentObject in FindObjectsOfType<Fading>())
             {
                 currentObject.isDissolving = true;
             }
         }
+        CombineElements();
     }
 
     void GetCurrentObjectOnButtonPressed()
@@ -274,5 +275,43 @@ public class PlayerController : MonoBehaviour
             Mathf.Clamp(transform.position.y, minPositionRange.y, maxPositionRange.y),
             transform.position.z
             );
+    }
+
+    void CombineElements()
+    {
+        if (Input.GetKey(KeyCode.C))
+        {
+            GeneralAttributes generalAttributes = GeneralAttributes.Instance;
+            GridItem firstCombinationObject = generalAttributes.houseGrid.GetItemFromIndex(generalAttributes.firstElementToCombineIndex);
+            GridItem secondCombinationObject = generalAttributes.houseGrid.GetItemFromIndex(generalAttributes.secondElementToCombineIndex);
+            GridItem resultCombinationObject = generalAttributes.houseGrid.GetItemFromIndex(generalAttributes.resultElementIndex);
+
+            if (firstCombinationObject.objectPlaced != null && secondCombinationObject.objectPlaced != null
+                && resultCombinationObject.Placeable)
+            {
+                InteractItem firstCombinationItem = firstCombinationObject.objectPlaced.GetComponent<InteractItem>();
+                InteractItem secondCombinationItem = secondCombinationObject.objectPlaced.GetComponent<InteractItem>();
+                if (firstCombinationItem != null && secondCombinationItem != null)
+                {
+                    GameObject newGameObject;
+                    if (!generalAttributes.combinationDictionary.TryGetValue(
+                        new KeyValuePair<string, string>(firstCombinationItem.idName, secondCombinationItem.idName), 
+                        out newGameObject))
+                    {
+                        if(!generalAttributes.combinationDictionary.TryGetValue(
+                            new KeyValuePair<string, string>(secondCombinationItem.idName, firstCombinationItem.idName),
+                            out newGameObject))
+                        {
+                            return;
+                        }
+                    }
+                    var newObject = Instantiate(newGameObject, new Vector3(resultCombinationObject.position.x,
+                            resultCombinationObject.position.y, transform.position.z), Quaternion.identity);
+                    resultCombinationObject.objectPlaced = newObject.transform;
+                    Destroy(firstCombinationItem.gameObject);
+                    Destroy(secondCombinationItem.gameObject);
+                }
+            }
+        }
     }
 }

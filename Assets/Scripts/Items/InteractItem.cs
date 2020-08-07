@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class InteractItem : MonoBehaviour
 {
-    [SerializeField]
     private bool isQuickPressInteractAvailable = false;
 
     public GameObject spawnObject;
+
+    public string idName = "Nothing Useful";
 
     public bool IsQuickPressInteractAvailable
     {
