@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class InteractItem : MonoBehaviour
 {
-    [SerializeField]
     private bool isQuickPressInteractAvailable = false;
 
     public GameObject spawnObject;
+
+    public Material originalMaterial;
+
+    public string idName = "Nothing Useful";
 
     public bool IsQuickPressInteractAvailable
     {
@@ -101,6 +104,8 @@ public class InteractItem : MonoBehaviour
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 }
+                GeneralAttributes.Instance.houseGrid.GetItemFromPosition(
+                    gameObject.transform.position.x, gameObject.transform.position.y).objectPlaced = null;
                 gameObject.SetActive(false);
             }
         }

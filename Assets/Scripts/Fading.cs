@@ -7,8 +7,6 @@ public class Fading : MonoBehaviour
 	[SerializeField]
 	Material dizolveMaterial;
 
-	Material material;
-
 	public bool isDissolving = false;
 	bool isAlreadyDissolving = false;
 	float fade = 1f;
@@ -36,8 +34,6 @@ public class Fading : MonoBehaviour
 				GetComponent<SpriteRenderer>().material = dizolveMaterial;
 				GetComponent<SpriteRenderer>().material.SetFloat("_Fade", fade);
 			}
-
-			Debug.Log(fade);
 
 			if (fade <= 0f)
 			{

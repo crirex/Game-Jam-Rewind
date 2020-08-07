@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
             {
                 PopUpMenuOn();
             }
-            if (game.activeInHierarchy) 
+            else
             {
                 PopUpMenuOff();   
             }

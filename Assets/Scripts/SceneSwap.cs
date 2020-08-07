@@ -16,7 +16,7 @@ public class SceneSwap : MonoBehaviour
 
         if(_button == null)
         {
-            Debug.Log("Scritul nu e pe buton.");
+            Debug.LogWarning("Scriptul nu e pe buton.");
         }
 
         _button.onClick.AddListener(TaskOnClick);
