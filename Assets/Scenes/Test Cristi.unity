@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 1644027531}
+  originalMaterial: {fileID: 0}
   idName: Nothing Useful
   secondsBetweenInteracts: 5
 --- !u!114 &524424456
@@ -1136,6 +1137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 0}
+  originalMaterial: {fileID: 0}
   idName: Nothing Useful
   secondsBetweenInteracts: 10
 --- !u!114 &1644027536
@@ -1184,6 +1186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 0}
+  originalMaterial: {fileID: 0}
   idName: Nothing Useful
   secondsBetweenInteracts: 0.5
 --- !u!212 &1718736335

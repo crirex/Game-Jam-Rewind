@@ -74,7 +74,15 @@ public class PlayerController : MonoBehaviour
                 Renderer latestClosestObjectRenderer = latestClosestObjectTransform.GetComponent<Renderer>();
                 if (latestClosestObjectRenderer != null)
                 {
-                    latestClosestObjectRenderer.material = defaultMaterial;
+                    InteractItem closestObject = latestClosestObjectRenderer.GetComponent<InteractItem>();
+                    if (closestObject != null)
+                    {
+                        latestClosestObjectRenderer.material = closestObject.originalMaterial;
+                    }
+                    else
+                    {
+                        latestClosestObjectRenderer.material = defaultMaterial;
+                    }
                 }
             }
 
@@ -203,7 +211,15 @@ public class PlayerController : MonoBehaviour
                         Renderer closestTileRenderer = curentGridItem.objectPlaced.GetComponent<Renderer>();
                         if (closestTileRenderer != null)
                         {
-                            closestTileRenderer.material = defaultMaterial;
+                            InteractItem closestObject = curentGridItem.objectPlaced.GetComponent<InteractItem>();
+                            if (closestObject != null)
+                            {
+                                closestTileRenderer.material = closestObject.originalMaterial;
+                            }
+                            else
+                            {
+                                closestTileRenderer.material = defaultMaterial;
+                            }
                         }
                         curentGridItem.objectPlaced.gameObject.SetActive(true);
                         if (curentGridItem.objectPlaced.gameObject.GetComponent<BoxCollider2D>() != null)

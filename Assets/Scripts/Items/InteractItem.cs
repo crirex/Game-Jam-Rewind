@@ -8,6 +8,8 @@ public class InteractItem : MonoBehaviour
 
     public GameObject spawnObject;
 
+    public Material originalMaterial;
+
     public string idName = "Nothing Useful";
 
     public bool IsQuickPressInteractAvailable
