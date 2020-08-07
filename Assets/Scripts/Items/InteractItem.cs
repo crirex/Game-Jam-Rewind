@@ -102,6 +102,8 @@ public class InteractItem : MonoBehaviour
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 }
+                GeneralAttributes.Instance.houseGrid.GetItemFromPosition(
+                    gameObject.transform.position.x, gameObject.transform.position.y).objectPlaced = null;
                 gameObject.SetActive(false);
             }
         }
