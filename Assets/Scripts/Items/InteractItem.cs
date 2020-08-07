@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class InteractItem : MonoBehaviour
 {
-    [SerializeField]
     private bool isQuickPressInteractAvailable = false;
 
     public GameObject spawnObject;
+
+    public string idName = "Nothing Useful";
 
     public bool IsQuickPressInteractAvailable
     {
@@ -27,16 +28,15 @@ public class InteractItem : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsQuickPressInteractAvailable)
+
+        if (!isQuickPressInteractAvailable)
         {
-            if (timeSinceLastInteractFinished + secondsBetweenInteracts < Time.time)
-            {
-                IsQuickPressInteractAvailable = true;
-            }
+            timeSinceLastInteractFinished += Time.deltaTime;
         }
-        else
+        if (timeSinceLastInteractFinished > secondsBetweenInteracts)
         {
-            timeSinceLastInteractFinished = Time.time;
+            isQuickPressInteractAvailable = true;
+            timeSinceLastInteractFinished = 0.0f;
         }
     }
 
@@ -66,6 +66,7 @@ public class InteractItem : MonoBehaviour
                         var newObject = Instantiate(spawnObject, new Vector3(currentGridItem.position.x,
                             currentGridItem.position.y, transform.position.z), Quaternion.identity);
                         currentGridItem.objectPlaced = newObject.transform;
+                        isQuickPressInteractAvailable = false;
                         return;
                     }
                     else
@@ -94,8 +95,15 @@ public class InteractItem : MonoBehaviour
         if (tag.Contains("Pickable"))
         {
             QuickPressInteract();
-            GeneralAttributes.Instance.inventory.items.Add(this);
-            gameObject.SetActive(false);
+            if (!GeneralAttributes.Instance.inventory.InventoryFull)
+            {
+                GeneralAttributes.Instance.inventory.items.Add(this);
+                if(gameObject.GetComponent<BoxCollider2D>() != null)
+                {
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+                gameObject.SetActive(false);
+            }
         }
     }
 }
