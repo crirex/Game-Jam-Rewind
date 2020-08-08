@@ -1604,7 +1604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Remaning Time
+  m_text: Remaining Time
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1dea282f9ccee864cb89817b1c76ddca, type: 2}
   m_sharedMaterial: {fileID: 4909456185667676108, guid: 1dea282f9ccee864cb89817b1c76ddca, type: 2}
@@ -2339,7 +2339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6074234609357194455, guid: fdedb887419ab4467940b9f3a24d8728, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6074234609357194456, guid: fdedb887419ab4467940b9f3a24d8728, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2387,11 +2387,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6074234609357194456, guid: fdedb887419ab4467940b9f3a24d8728, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -850
+      value: -561
       objectReference: {fileID: 0}
     - target: {fileID: 6074234609357194456, guid: fdedb887419ab4467940b9f3a24d8728, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -400
+      value: -293
       objectReference: {fileID: 0}
     - target: {fileID: 6074234609357194456, guid: fdedb887419ab4467940b9f3a24d8728, type: 3}
       propertyPath: m_SizeDelta.x
