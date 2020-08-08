@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: bd1f0d5193b433948a91ff6ec5ecd4a6
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: fc72adba023bc454eaa98bd21f5ff59c
+  - enabled: 1
     path: Assets/Scenes/Test Cristi.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/EndScreen.unity
+    guid: 3905da02ffabb734c8a2040fb7b181ef
   m_configObjects: {}
