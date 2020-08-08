@@ -15,26 +15,21 @@ public class GeneralAttributes: MonoBehaviour
     public Vector2Int resultElementIndex;
 
     public List<GameObject> gameObjectsForDictionary;
+    public List<GameObject> gameObjectsToSpawnAtTheBeginning;
+    public List<Vector2> positionsForGameObjectsToSpawn;
     public Dictionary<KeyValuePair<string, string>, GameObject> combinationDictionary;
 
-    private static GeneralAttributes instance = null;
-    public static GeneralAttributes Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    public static GeneralAttributes Instance { get; private set; } = null;
 
     void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
@@ -62,5 +57,21 @@ public class GeneralAttributes: MonoBehaviour
         combinationDictionary.Add(new KeyValuePair<string, string>("Fire", "Clay"), gameObjectsForDictionary[15]); //Bricks
         combinationDictionary.Add(new KeyValuePair<string, string>("Stone", "Clay"), gameObjectsForDictionary[16]); //Cement
         combinationDictionary.Add(new KeyValuePair<string, string>("Coal", "Water"), gameObjectsForDictionary[17]); //Oil
+    }
+
+    public void ResetGame(Transform player)
+    {
+
+        for(int i = 0; i < gameObjectsToSpawnAtTheBeginning.Count; ++i)
+        {
+            var newObject = Instantiate(gameObjectsToSpawnAtTheBeginning[i], new Vector3(positionsForGameObjectsToSpawn[i].x,
+                            positionsForGameObjectsToSpawn[i].y, player.position.z), Quaternion.identity);
+            GridItem griditem = houseGrid.GetItemFromPosition(newObject.transform.position.x, newObject.transform.position.y);
+            if (griditem != null)
+            {
+                griditem.objectPlaced = newObject.transform;
+            }
+            newObject.transform.parent = player.parent;
+        }
     }
 }

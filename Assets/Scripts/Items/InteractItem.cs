@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class InteractItem : MonoBehaviour
 {
-    private bool isQuickPressInteractAvailable = false;
-
     public GameObject spawnObject;
 
     public Material originalMaterial;
 
     public string idName = "Nothing Useful";
 
-    public bool IsQuickPressInteractAvailable
-    {
-        get => isQuickPressInteractAvailable;
-        private set => isQuickPressInteractAvailable = value;
-    }
+    public bool IsQuickPressInteractAvailable { get; private set; } = false;
 
     [SerializeField]
     private float secondsBetweenInteracts = 0.5f;
@@ -30,15 +24,20 @@ public class InteractItem : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        if (!isQuickPressInteractAvailable)
+        if (!(transform.position.x < GeneralAttributes.Instance.safePositionMax.x &&
+            transform.position.y < GeneralAttributes.Instance.safePositionMax.y &&
+            GeneralAttributes.Instance.safePositionMin.x < transform.position.x &&
+            GeneralAttributes.Instance.safePositionMin.y < transform.position.y))
         {
-            timeSinceLastInteractFinished += Time.deltaTime;
-        }
-        if (timeSinceLastInteractFinished > secondsBetweenInteracts)
-        {
-            isQuickPressInteractAvailable = true;
-            timeSinceLastInteractFinished = 0.0f;
+            if (!IsQuickPressInteractAvailable)
+            {
+                timeSinceLastInteractFinished += Time.deltaTime;
+            }
+            if (timeSinceLastInteractFinished > secondsBetweenInteracts)
+            {
+                IsQuickPressInteractAvailable = true;
+                timeSinceLastInteractFinished = 0.0f;
+            }
         }
     }
 
@@ -46,7 +45,6 @@ public class InteractItem : MonoBehaviour
     {
         if (IsQuickPressInteractAvailable && tag.Contains("Interactable"))
         {
-            timeSinceLastInteractFinished = 0;
             //Throw object on the ground. Object is assignable
             Queue<GridItem> availableSpawnPoints = new Queue<GridItem>();
             GridItem spawnPointGridItem = GeneralAttributes.Instance.houseGrid.GetItemFromPosition(
@@ -57,8 +55,7 @@ public class InteractItem : MonoBehaviour
                 return;
             }
             availableSpawnPoints.Enqueue(spawnPointGridItem);
-
-            while(availableSpawnPoints.Count > 0 && availableSpawnPoints.Count < (GeneralAttributes.Instance.houseGrid.TotalSize / 2)) //Magical number
+            while (availableSpawnPoints.Count > 0 && availableSpawnPoints.Count < (GeneralAttributes.Instance.houseGrid.TotalSize / 2)) //Magical number
             {
                 var currentGridItem = availableSpawnPoints.Dequeue();
                 if (currentGridItem != null)
@@ -68,7 +65,9 @@ public class InteractItem : MonoBehaviour
                         var newObject = Instantiate(spawnObject, new Vector3(currentGridItem.position.x,
                             currentGridItem.position.y, transform.position.z), Quaternion.identity);
                         currentGridItem.objectPlaced = newObject.transform;
-                        isQuickPressInteractAvailable = false;
+                        IsQuickPressInteractAvailable = false;
+                        timeSinceLastInteractFinished = 0;
+                        AudioManager.instance.Play("Click");
                         return;
                     }
                     else
@@ -96,7 +95,7 @@ public class InteractItem : MonoBehaviour
     {
         if (tag.Contains("Pickable"))
         {
-            QuickPressInteract();
+            //QuickPressInteract();
             if (!GeneralAttributes.Instance.inventory.InventoryFull)
             {
                 GeneralAttributes.Instance.inventory.items.Add(this);
@@ -107,6 +106,7 @@ public class InteractItem : MonoBehaviour
                 GeneralAttributes.Instance.houseGrid.GetItemFromPosition(
                     gameObject.transform.position.x, gameObject.transform.position.y).objectPlaced = null;
                 gameObject.SetActive(false);
+                AudioManager.instance.Play("Click");
             }
         }
     }

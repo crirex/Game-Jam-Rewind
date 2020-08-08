@@ -24,6 +24,7 @@ public class SceneSwap : MonoBehaviour
 
     void TaskOnClick()
     {
+        AudioManager.instance.Stop("Intro");
         SceneManager.LoadScene(sceneBuildIndex: scene);
     }
    

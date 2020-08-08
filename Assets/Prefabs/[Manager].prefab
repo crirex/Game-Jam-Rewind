@@ -45,7 +45,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mixerGroup: {fileID: 0}
-  sounds: []
+  sounds:
+  - name: Background
+    clip: {fileID: 8300000, guid: 0d9c05c093615477e8dffb2eda9fd34d, type: 3}
+    randomClips: []
+    volume: 0.2
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Click
+    clip: {fileID: 8300000, guid: fc4682a725207e14282b7069f6189250, type: 3}
+    randomClips: []
+    volume: 0.5
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
+  - name: Intro
+    clip: {fileID: 8300000, guid: c41a01a9a071947dfa937c951f7efefb, type: 3}
+    randomClips: []
+    volume: 0.2
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!114 &5670809446011482916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,23 +94,33 @@ MonoBehaviour:
   secondElementToCombineIndex: {x: 8, y: 8}
   resultElementIndex: {x: 7, y: 8}
   gameObjectsForDictionary:
-  - {fileID: 1837172332727272342, guid: caee0e2d7c254794d95a082fc909ad47, type: 3}
-  - {fileID: 8471052106542379237, guid: 4c828ae319acc1546beb11127c39133a, type: 3}
-  - {fileID: 6251682768764473486, guid: e682f266a4e99d2419ff334df76ca04a, type: 3}
-  - {fileID: 39416073021254181, guid: 294e4c1a314722e44a56bdad50b24466, type: 3}
-  - {fileID: 7726315626559448256, guid: 2873b306f9aae5e44b3d6bdedd1051b3, type: 3}
-  - {fileID: 1988703932192203682, guid: e874aada6ea367c4580e3a4d0e738fec, type: 3}
-  - {fileID: 6014878474912008303, guid: c8ee5569dd2e87248a164d9c31623b75, type: 3}
-  - {fileID: 368799326647165111, guid: 839a1d829da38e04b8c98a6ff8384fe4, type: 3}
-  - {fileID: 6912887387051890059, guid: 03c93e6ebc7d94b49bce9d5696db2e3f, type: 3}
-  - {fileID: 3405255037216358259, guid: 50eb54c2d46a2ee44ae85aa77f827c22, type: 3}
-  - {fileID: 8589415026781111329, guid: b81615984b41d514582187510b86daba, type: 3}
-  - {fileID: 8790863951560572790, guid: 190188bf7d7e73f46883616de043fdc3, type: 3}
-  - {fileID: 655973118908135786, guid: a4bd5f3bc33863445b62f3d277839a49, type: 3}
-  - {fileID: 1258466812904411015, guid: 9c119506cd3c68a4c95961fc62f43277, type: 3}
-  - {fileID: 4900697563762834098, guid: 73049fb3395a3c44b9fa68c5a8923394, type: 3}
-  - {fileID: 4472330787407673409, guid: 91882aeb824660d43b5386bf69453b9a, type: 3}
-  - {fileID: 3431819931106000457, guid: 28107a8c25ce98e42aa1b1a54e4c1cc4, type: 3}
-  - {fileID: 477415210615801817, guid: b0735c8e863cfe1439d9b41833ec3e5f, type: 3}
-  - {fileID: 3431819931106000457, guid: 28107a8c25ce98e42aa1b1a54e4c1cc4, type: 3}
-  - {fileID: 6593733995630357869, guid: 1125f1f96b3f9d64a842e5c3bade7266, type: 3}
+  - {fileID: 3909238670741493751, guid: 02f4497b5981b594880cc7304c490e5f, type: 3}
+  - {fileID: 9212193830645062408, guid: 2551b5bbe04dd3d4e9a6df0fc913ec60, type: 3}
+  - {fileID: 7488815114577103021, guid: 5da7607cfd9dec94da493b9b23c2944a, type: 3}
+  - {fileID: 4157786965076172754, guid: c3a4a9660b0ed8441a64d6e4efb9d531, type: 3}
+  - {fileID: 6506937743419285018, guid: 655256cc46f4d9c43a614ea58046f20d, type: 3}
+  - {fileID: 7401386511226866472, guid: 52ea19a0c441baa438ff246acaf591b8, type: 3}
+  - {fileID: 2925197424853181295, guid: b6f30f522fc0a624f91badc6dbce1612, type: 3}
+  - {fileID: 538389958659274894, guid: e1506f57be82ea34fbbbf3ecaa646db3, type: 3}
+  - {fileID: 2633490564172195227, guid: bce45433a792f8b4ab10f878e849915c, type: 3}
+  - {fileID: 3506131188508447736, guid: 3306ddd7ea385984faec2b438a257fa8, type: 3}
+  - {fileID: 128469960555656410, guid: f6ffd22bc4001e94c807227709c4c746, type: 3}
+  - {fileID: 2691936418673377496, guid: b96c174df0335a54fae476ecd01fffd2, type: 3}
+  - {fileID: 4043870903732596869, guid: 249ff767019176e4580758095da72752, type: 3}
+  - {fileID: 7018330174346990870, guid: 683b7a3f7c0dd254f9e8bbfca2394593, type: 3}
+  - {fileID: 8594096131967451078, guid: fc03fd26514feee44b7e63f63545ae3f, type: 3}
+  - {fileID: 117351769705087493, guid: 664f643a9db455b4aa1647de6d6ea127, type: 3}
+  - {fileID: 2618196352551782157, guid: 0600f0d8f078dea4c82af22c5ce116a7, type: 3}
+  - {fileID: 3768218699652618802, guid: 2f09d41fefe32ab4ab049631b69c91dc, type: 3}
+  - {fileID: 3357667204432504049, guid: 2eb54bcb0b8694d4faae4701e071def7, type: 3}
+  - {fileID: 4865730526303096451, guid: 23d5e2a52d2b5cb4bad32fa11d35543e, type: 3}
+  gameObjectsToSpawnAtTheBeginning:
+  - {fileID: 2232115480019664760, guid: 5d0bb2f9b58d6c545aedacbcd878cd35, type: 3}
+  - {fileID: 1748008708143104012, guid: 183a786f62121624eb295c58e43bf42d, type: 3}
+  - {fileID: 7502685723316044391, guid: cc463a98f9220584eba774d1dc353fcb, type: 3}
+  - {fileID: 2316893104617018787, guid: a107f1a4aa71ab140823bd7c117b7c5d, type: 3}
+  positionsForGameObjectsToSpawn:
+  - {x: 2.5, y: 4.5}
+  - {x: 4.5, y: 2.5}
+  - {x: 13.5, y: 8.5}
+  - {x: 13.5, y: 2.5}
