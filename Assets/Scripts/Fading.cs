@@ -9,7 +9,7 @@ public class Fading : MonoBehaviour
 
 	public bool isDissolving = false;
 	bool isAlreadyDissolving = false;
-	float fade = 1f;
+	public float fade = 1f;
 
 	void Start()
 	{
@@ -24,6 +24,7 @@ public class Fading : MonoBehaviour
 			GeneralAttributes.Instance.safePositionMin.y < transform.position.y && !isAlreadyDissolving)
 		{
 			isDissolving = false;
+			fade = 1f;
 		}
 		if (isDissolving)
 		{

@@ -29,6 +29,12 @@ public class PlayerController : MonoBehaviour
 
     private float howMuchTimeTheActionButtonWasPressed = 0;
 
+    private bool isReseting;
+    private float resetTimer;
+    public float goalResetTimer;
+
+    public SliderFill dyingSlider;
+
     [SerializeField]
     private Vector2 maxPositionRange;
     [SerializeField]
@@ -44,6 +50,8 @@ public class PlayerController : MonoBehaviour
         placementVision = new GameObject();
         placementVision.transform.parent = transform;
         placementVision.transform.localPosition = new Vector3(0,0,0);
+        GeneralAttributes.Instance.ResetGame(transform);
+        AudioManager.instance.Play("Background");
     }
 
     // Update is called once per frame
@@ -58,9 +66,16 @@ public class PlayerController : MonoBehaviour
             foreach (Fading currentObject in FindObjectsOfType<Fading>())
             {
                 currentObject.isDissolving = true;
+                
             }
+            isReseting = true;
         }
         CombineElements();
+        TimeToReset();
+        if(dyingSlider.value <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void GetCurrentObjectOnButtonPressed()
@@ -168,7 +183,7 @@ public class PlayerController : MonoBehaviour
             howMuchTimeTheActionButtonWasPressed += Time.deltaTime;
         }
     }
-
+    
     void PlaceCurrentObjectOnButtonPressed()
     {
         /////////////////////////////////////////////////////////////
@@ -178,6 +193,11 @@ public class PlayerController : MonoBehaviour
         {
             if (curentGridItem != null && curentGridItem.Placeable)
             {
+                if (GeneralAttributes.Instance.inventory.peekInteractItem() == null)
+                {
+                    GeneralAttributes.Instance.inventory.popInteractItem();
+                    return;
+                }
                 var selectedInventoryItem = GeneralAttributes.Instance.inventory.peekInteractItem().transform;
                 selectedInventoryItem.gameObject.SetActive(true);
                 selectedInventoryItem.position = new Vector3(
@@ -228,6 +248,7 @@ public class PlayerController : MonoBehaviour
                         }
                         curentGridItem.objectPlaced.position = new Vector3(curentGridItem.position.x, curentGridItem.position.y,
                             curentGridItem.objectPlaced.transform.position.z);
+                        AudioManager.instance.Play("Click");
                     }
                 }
             }
@@ -326,8 +347,38 @@ public class PlayerController : MonoBehaviour
                     resultCombinationObject.objectPlaced = newObject.transform;
                     Destroy(firstCombinationItem.gameObject);
                     Destroy(secondCombinationItem.gameObject);
+                    AudioManager.instance.Play("Click");
                 }
             }
         }
+    }
+
+    void TimeToReset()
+    {
+        if(isReseting)
+        {
+            resetTimer += Time.deltaTime;
+            foreach (Fading currentObject in FindObjectsOfType<Fading>())
+            {
+                if(!currentObject.isDissolving)
+                {
+                    currentObject.isDissolving = true;
+                    currentObject.fade -= resetTimer/5;
+                }
+            }
+
+            if (resetTimer > goalResetTimer)
+            {
+                dyingSlider.ResetSlider();
+                GeneralAttributes.Instance.ResetGame(transform);
+                isReseting = false;
+                resetTimer = 0.0f;
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        //GameOver
     }
 }

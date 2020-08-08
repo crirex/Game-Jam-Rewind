@@ -11,7 +11,7 @@ public class SliderFill : MonoBehaviour
     public bool isDecreasing = true;
     public float timeToWait;
 
-    public float value = 0;
+    public float value = 0f;
 
     void Start()
     {
@@ -47,12 +47,26 @@ public class SliderFill : MonoBehaviour
         {
             if (_slider == null)
             {
-                _image.fillAmount += value == -1 ? (Time.deltaTime / timeToWait * (isDecreasing ? -1 : 1)) : value;
+                _image.fillAmount += Time.deltaTime / timeToWait * (isDecreasing ? -1 : 1);
+                value = _image.fillAmount;
             }
             else
             {
-                _slider.value += value == -1 ? (Time.deltaTime / timeToWait * (isDecreasing ? -1 : 1)) : value;
+                _slider.value += Time.deltaTime / timeToWait * (isDecreasing ? -1 : 1);
+                value = _slider.value;
             }
+        }
+    }
+
+    public void ResetSlider()
+    {
+        if (_slider == null)
+        {
+            _image.fillAmount = isDecreasing ? 1f : 0f;
+        }
+        else
+        {
+            _slider.value = isDecreasing ? 1f : 0f;
         }
     }
 }

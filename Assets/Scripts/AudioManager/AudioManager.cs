@@ -36,7 +36,9 @@ public class AudioManager : MonoBehaviour
 
 	void Start()
 	{
-
+		//Play("Background");
+		//Play("Click");
+		//Play("Intro");
 	}
 
 	public void Play(string sound) //Use for music loops or single sounds

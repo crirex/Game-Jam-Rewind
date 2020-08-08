@@ -7,7 +7,12 @@ public class Menu : MonoBehaviour
 {
 	public GameObject game;
 	public GameObject popupMenu;
-	
+
+	private void Start()
+	{
+		AudioManager.instance.Play("Intro");
+	}
+
 	void Update()
     {
         if(Input.GetKeyDown (KeyCode.Escape)) 
@@ -25,29 +30,29 @@ public class Menu : MonoBehaviour
 	 
 	public void PlayButton()
 	{
-			Score.scoreInt = 0;
-			SceneManager.LoadScene(1);
+		Score.scoreInt = 0;
+		SceneManager.LoadScene(1);
 	}
 	
 	public void QuitButton()
 	{
-			Application.Quit();
+		Application.Quit();
 	}
 	
 	public void MainMenu()
 	{
-			SceneManager.LoadScene(0);
+		SceneManager.LoadScene(0);
 	}
 	
 	public void PopUpMenuOn()
 	{
-			game.SetActive(true);
-			popupMenu.SetActive(false);
+		game.SetActive(true);
+		popupMenu.SetActive(false);
 	}
 	
 	public void PopUpMenuOff()
 	{
-			game.SetActive(false);
-			popupMenu.SetActive(true);
+		game.SetActive(false);
+		popupMenu.SetActive(true);
 	}
 }
