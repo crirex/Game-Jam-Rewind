@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
         placementVision.transform.parent = transform;
         placementVision.transform.localPosition = new Vector3(0,0,0);
         GeneralAttributes.Instance.ResetGame(transform);
+        AudioManager.instance.Stop("Intro");
+        AudioManager.instance.Stop("Background");
         AudioManager.instance.Play("Background");
     }
 

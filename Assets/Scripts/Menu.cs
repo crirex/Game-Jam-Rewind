@@ -10,6 +10,8 @@ public class Menu : MonoBehaviour
 
 	private void Start()
 	{
+		AudioManager.instance.Stop("Background");
+		AudioManager.instance.Stop("Intro");
 		AudioManager.instance.Play("Intro");
 	}
 
